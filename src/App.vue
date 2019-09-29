@@ -3,16 +3,19 @@
 <template>
   <div id='app'>
     <ToDoList :todos="todos"></ToDoList> <!-- Make the array "todos" available to the ToDoList component via binding. -->
+    <CreateTodo v-on:create-todo="createTodo"></CreateTodo>
   </div>
 </template>
 
 <script>
 import ToDoList from './components/ToDoList' // Make the ToDoList component available to this App.
+import CreateTodo from './components/CreateTodo'
 
 export default { // Vue loader looks here first, this data gets exported to the 'app' div in main.js.
   name: 'App',
   components: {
     ToDoList,
+    CreateTodo,
   },
   // data function avails data to the template
   data() {
@@ -35,7 +38,15 @@ export default { // Vue loader looks here first, this data gets exported to the 
         done: false,
       }],
     }
-  }
+  },
+  methods: {
+    createTodo(title) {
+      this.todos.push({
+        title,
+        done: false,
+      });
+    },
+  },
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
 <div class='ui centered card'>
   <!-- Todo is shown when we are not in editing mode. -->
-  <div class='content' v-show="!isEditing">
+  <div class='content' v-show="!isEditing">  <!-- Conditionally shows dom element. Changes 'display' property. -->
     <div class='header'>
       {{todo.title}}
     </div>
@@ -9,8 +9,11 @@
       {{todo.project}}
     </div>
     <div class='extra content'>
-      <span class='right floated edit icon' v-on:click="showForm">
+      <span class='right floated edit icon' v-on:click="showForm"> <!-- Attaches event listener showForm to this element. -->
         <i class='edit icon'></i>
+      </span>
+      <span class='right floated trash icon' v-on:click="deleteTodo(todo)"> <!-- Captures this components events -->
+        <i class='trash icon'></i>
       </span>
     </div>
   </div>
@@ -55,6 +58,12 @@ export default {
     },
     hideForm() {
       this.isEditing = false;
+    },
+    deleteTodo(todo){
+      this.$emit('delete-todo', todo); // emitting sends an event back up to the parent component
+    },
+    completeTodo(todo){
+      this.$emit('complete-todo', todo);
     },
   },
 };
