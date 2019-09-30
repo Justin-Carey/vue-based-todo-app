@@ -2,14 +2,15 @@
 
 <template>
   <div id='app'>
+    <h1 class="ui dividing centered header">Vue.js Todo App</h1>
     <ToDoList :todos="todos"></ToDoList> <!-- Make the array "todos" available to the ToDoList component via binding. -->
-    <CreateTodo v-on:create-todo="createTodo"></CreateTodo>
+    <CreateTodo v-on:create-todo="createTodo"></CreateTodo> <!-- If the 'create-todo' event is emitted from the CreateTodo component, run createTodo() -->
   </div>
 </template>
 
 <script>
-import ToDoList from './components/ToDoList' // Make the ToDoList component available to this App.
-import CreateTodo from './components/CreateTodo'
+import ToDoList from './components/ToDoList'      // Make the ToDoList component available to this App.
+import CreateTodo from './components/CreateTodo' // Make the CreateTodo component available to this App.
 
 export default { // Vue loader looks here first, this data gets exported to the 'app' div in main.js.
   name: 'App',
@@ -21,30 +22,15 @@ export default { // Vue loader looks here first, this data gets exported to the 
   data() {
     return {
       todos:[{
-        title: 'Todo A',
-        project: 'Project A',
+        title: 'Developer new chat feature',
+        project: 'Ayogo pipeline',
         done: false,
-      }, {
-        title: 'Todo B',
-        project: 'Project B',
-        done: false,
-      }, {
-        title: 'Todo C',
-        project: 'Project C',
-        done: false,
-      }, {
-        title: 'Todo D',
-        project: 'Project D',
-        done: false,
-      }],
+      },],
     }
   },
   methods: {
-    createTodo(title) {
-      this.todos.push({
-        title,
-        done: false,
-      });
+    createTodo(newTodo) {           // This method takes a newTodo object and pushes it into the todo array within data.
+      this.todos.push(newTodo);
     },
   },
 }
